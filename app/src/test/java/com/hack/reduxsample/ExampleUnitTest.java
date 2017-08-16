@@ -1,4 +1,4 @@
-package com.hack.redux;
+package com.hack.reduxsample;
 
 import org.junit.Test;
 
