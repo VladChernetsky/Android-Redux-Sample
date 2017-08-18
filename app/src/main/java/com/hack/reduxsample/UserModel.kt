@@ -1,8 +1,8 @@
 package com.hack.reduxsample
 
 import com.hack.reduxsample.redux.ReduxModel
-import io.reactivex.Observer
+import io.reactivex.subjects.PublishSubject
 
 interface UserModel : ReduxModel<UserState, UserView> {
-    val modify: Observer<String>
+    val actionState: PublishSubject<String>
 }

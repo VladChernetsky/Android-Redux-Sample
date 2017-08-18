@@ -2,18 +2,18 @@ package com.hack.reduxsample
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import com.hack.reduxsample.redux.ReduxModel
+import com.hack.reduxsample.redux.extension.asConsumer
 import com.jakewharton.rxbinding2.widget.textChanges
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val model: ReduxModel<UserState, UserView> = UserModelImpl(UserState(""))
+    private val model: UserModel = UserModelImpl(UserState(""))
     private val compositeSubscription = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,18 +31,21 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
         val view = object : UserView {
-            override val onUserEditTextChange: Observable<String> = etUserName.textChanges().map { it.toString() }
+            override val onModify: Observable<String> = etUserName.textChanges().map { it.toString() }
+            override val displayData: PublishSubject<String> = PublishSubject.create()
         }
 
-        intent(view.onUserEditTextChange
+        intent(view.displayData
                 .map { it.toString() }
                 .distinctUntilChanged()
                 .subscribe({
-                    if (etUserName.text.toString() != it)
-                        etUserName.setText(it)
-
-                    Log.i("MainActivity", it)
+                    etUserSurName.setText(it)
                 }))
+
+        intent(view.onModify
+                .map { it.toString() }
+                .subscribe(model.actionState.asConsumer())
+        )
 
         model.init(view)
     }
