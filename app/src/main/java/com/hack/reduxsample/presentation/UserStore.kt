@@ -1,6 +1,6 @@
-package com.hack.reduxsample
+package com.hack.reduxsample.presentation
 
-import com.hack.reduxsample.redux.ReduxStore
+import com.hack.reduxsample.presentation.core.ReduxStore
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 

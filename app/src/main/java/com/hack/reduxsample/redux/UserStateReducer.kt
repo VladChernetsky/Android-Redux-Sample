@@ -1,7 +1,8 @@
 package com.hack.reduxsample.redux
 
-import com.hack.reduxsample.UserActions
-import com.hack.reduxsample.UserState
+import com.hack.reduxsample.presentation.UserActions
+import com.hack.reduxsample.presentation.UserState
+import com.hack.reduxsample.presentation.core.Reducer
 
 class UserStateReducer : Reducer<UserState, UserActions> {
 

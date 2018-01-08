@@ -2,5 +2,7 @@
     <string name="app_name">Redux</string>
     <string name="action_settings">Settings</string>
     <string name="enter_user_name">Enter User name</string>
-    <string name="surname">Surname</string>
+    <string name="surname">User surname</string>
+    <string name="user_name">User name</string>
+    <string name="Login">Login</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.hack.reduxsample
+package com.hack.reduxsample.presentation
 
 import com.hack.reduxsample.redux.ReduxModel
 import io.reactivex.subjects.PublishSubject

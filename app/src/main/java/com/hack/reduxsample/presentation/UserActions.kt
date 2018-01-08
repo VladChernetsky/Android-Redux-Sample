@@ -1,6 +1,6 @@
-package com.hack.reduxsample
+package com.hack.reduxsample.presentation
 
-import com.hack.reduxsample.redux.Action
+import com.hack.reduxsample.presentation.core.Action
 
 sealed class UserActions : Action {
     class ChangeTextAction(val text: String) : UserActions()

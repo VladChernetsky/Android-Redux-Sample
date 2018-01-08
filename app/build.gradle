@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
     defaultConfig {
         applicationId "com.hack.redux"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -31,9 +31,9 @@ dependencies {
     })
 
     //UI
-    implementation 'com.android.support:appcompat-v7:26.+'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:design:26.+'
+    implementation 'com.android.support:design:27.0.2'
 
     //RX
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
@@ -41,6 +41,9 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-design-kotlin:2.0.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation "android.arch.lifecycle:extensions:1.0.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
+
 }
 repositories {
     mavenCentral()
