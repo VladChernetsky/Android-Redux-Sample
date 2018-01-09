@@ -2,6 +2,7 @@ package com.hack.reduxsample.presentation
 
 import android.arch.lifecycle.LifecycleOwner
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
@@ -29,11 +30,12 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, UserView {
         )
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        mainDispatcher.subscribe()
+        mainDispatcher.subscribe { state -> System.out.println(state) }
     }
 
     override val onLoginClick: Observable<Any>
@@ -51,5 +53,9 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, UserView {
 
     override fun showLoading(show: Boolean) {
         progress.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    override fun showError(message: String) {
+        Snackbar.make(btnLogin, message, Snackbar.LENGTH_LONG).show()
     }
 }

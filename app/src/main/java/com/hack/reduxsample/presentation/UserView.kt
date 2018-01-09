@@ -8,4 +8,5 @@ interface UserView : ReduxView<UserState> {
     val onNameChanged: Observable<String>
     val onSurnameChanged: Observable<String>
     fun showLoading(show: Boolean)
+    fun showError(message: String)
 }

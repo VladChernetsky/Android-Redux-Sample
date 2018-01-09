@@ -3,7 +3,6 @@ package com.hack.reduxsample.presentation
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
-import android.util.Log
 import com.hack.reduxsample.presentation.core.ReduxDispatcher
 
 class UserDispatcher(
@@ -11,23 +10,25 @@ class UserDispatcher(
         private val lifecycle: Lifecycle)
     : ReduxDispatcher, LifecycleObserver {
 
+    private val store: UserStore = UserStore(emptyState, UserReducer())
+
     init {
         lifecycle.addObserver(this)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun bindIntents() {
-        userView.onNameChanged.subscribe({ System.out.println("User Name: $it") })
-        userView.onSurnameChanged.subscribe({ System.out.println("User Surname: $it") })
-        userView.onLoginClick.subscribe({ System.out.println("Login Clicked") })
+        userView.onNameChanged.subscribe { System.out.println("User Name: $it") }
+        userView.onSurnameChanged.subscribe { System.out.println("User Surname: $it") }
+        userView.onLoginClick.subscribe { System.out.println("Login Clicked") }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun dispose() {
-        Log.i("UserDispatcher", "dispose")
+        store.tearDown()
     }
 
-    fun subscribe() {
-
+    fun subscribe(onNext: (UserState) -> Unit) {
+        store.asObservable().subscribe(onNext)
     }
 }
