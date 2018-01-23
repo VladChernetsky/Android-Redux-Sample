@@ -2,6 +2,12 @@ package com.hack.reduxsample.presentation
 
 import com.hack.reduxsample.presentation.core.ReduxState
 
-data class UserState(val userName: String) : ReduxState
+data class UserState(
+        val userName: String,
+        val password: String,
+        val error: Throwable?,
+        val loading: Boolean,
+        val isLogged: Boolean
+) : ReduxState
 
-public val emptyState = UserState("")
+val emptyState = UserState("", "", null, false, false)

@@ -26,6 +26,7 @@ class UserStore(
     }
 
     override fun dispatch(action: Action) {
+        System.out.println(action)
         actionSubject.onNext(action)
     }
 
