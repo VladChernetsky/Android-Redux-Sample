@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.Toast
 import com.hack.reduxsample.R
 import com.hack.reduxsample.extensions.bind
 import com.hack.reduxsample.extensions.provideDispatcher
@@ -73,7 +72,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
 
         if (state.isLogged) {
-            Toast.makeText(this, "Logged", Toast.LENGTH_SHORT).show()
+            Snackbar.make(btnLogin, "Logged", Snackbar.LENGTH_INDEFINITE).show()
         }
     }
 

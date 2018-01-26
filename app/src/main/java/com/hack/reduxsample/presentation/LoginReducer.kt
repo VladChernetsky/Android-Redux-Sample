@@ -11,7 +11,7 @@ class LoginReducer : Reducer<LoginState> {
             is LoginActions.PasswordChangeAction -> oldState.copy(password = action.password)
             is LoginActions.Error -> oldState.copy(error = action.error)
             is LoginActions.Loading -> oldState.copy(loading = action.loading)
-            is LoginActions.Logged -> oldState.copy(loading = action.logged)
+            is LoginActions.Logged -> oldState.copy(isLogged = action.logged)
             else -> {
                 oldState.copy(error = IllegalArgumentException())
             }
