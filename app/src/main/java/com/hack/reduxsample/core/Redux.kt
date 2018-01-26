@@ -1,4 +1,4 @@
-package com.hack.reduxsample.presentation.core
+package com.hack.reduxsample.core
 
 import io.reactivex.Observable
 
@@ -8,15 +8,12 @@ interface ReduxStore<State : ReduxState> {
     fun asObservable(): Observable<State>
     fun currentState(): State
     fun tearDown()
-
 }
 
 interface Reducer<State : ReduxState> {
-    fun reduce(state: State, action: Action): State
+    fun reduce(oldState: State, action: Action): State
 }
 
 interface Action
 
 interface ReduxState
-
-interface ReduxDispatcher

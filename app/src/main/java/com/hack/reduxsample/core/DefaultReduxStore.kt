@@ -1,20 +1,18 @@
-package com.hack.reduxsample.presentation
+package com.hack.reduxsample.core
 
-import com.hack.reduxsample.presentation.core.Action
-import com.hack.reduxsample.presentation.core.ReduxStore
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-class UserStore(
-        private val defaultState: UserState,
-        private val reducer: UserReducer
-) : ReduxStore<UserState> {
+open class DefaultReduxStore<STATE : ReduxState>(
+        private val defaultState: STATE,
+        reducer: Reducer<STATE>
+) : ReduxStore<STATE> {
 
-    private val stateSubject = BehaviorSubject.create<UserState>()
-    private val actionSubject = PublishSubject.create<Action>()
-    private val subscriptions = CompositeDisposable()
+    protected val stateSubject = BehaviorSubject.create<STATE>()
+    protected val actionSubject = PublishSubject.create<Action>()
+    protected val subscriptions = CompositeDisposable()
 
     init {
         subscriptions.add(
@@ -26,7 +24,6 @@ class UserStore(
     }
 
     override fun dispatch(action: Action) {
-        System.out.println(action)
         actionSubject.onNext(action)
     }
 
@@ -34,9 +31,9 @@ class UserStore(
         subscriptions.add(actions.subscribe { dispatch(it) })
     }
 
-    override fun asObservable(): Observable<UserState> = stateSubject
+    override fun asObservable(): Observable<STATE> = stateSubject
 
-    override fun currentState(): UserState {
+    override fun currentState(): STATE {
         return if (stateSubject.hasValue()) stateSubject.value else defaultState
     }
 

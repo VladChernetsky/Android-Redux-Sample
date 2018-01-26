@@ -1,4 +1,4 @@
-package com.hack.reduxsample.presentation.utils
+package com.hack.reduxsample.extensions
 
 import android.app.Activity
 import android.support.annotation.IdRes
